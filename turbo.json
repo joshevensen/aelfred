@@ -5,7 +5,13 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
+        "dist/**",
+        ".mastra/output/**"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -15,7 +21,15 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": [
+        "DATABASE_URL",
+        "DO_INFERENCE_BASE_URL",
+        "DO_INFERENCE_API_KEY",
+        "DO_MODEL_SMALL",
+        "DO_MODEL_MID",
+        "DO_MODEL_FRONTIER"
+      ]
     },
     "test": {
       "dependsOn": ["^build"]
