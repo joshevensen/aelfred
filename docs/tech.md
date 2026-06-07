@@ -55,7 +55,7 @@ All tables live in the same Postgres instance on the DO Volume. Mastra manages i
 
 ### Mastra Tables
 
-_Auto-created and managed by Mastra on first run. Never modify manually. All prefixed with `mastra_`._
+_Auto-created and managed by Mastra on first run. Never modify manually. All prefixed with `mastra_`.\_
 
 **mastra_messages** — every conversation message
 | Column | Type | Notes |
