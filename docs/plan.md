@@ -13,6 +13,7 @@ Get the monorepo scaffolded, Mastra and Next.js running locally, Postgres ready,
 ### Server Tasks
 
 **Monorepo**
+
 - [ ] Initialize Turborepo monorepo (`npx create-turbo@latest`)
 - [ ] Create `apps/server` for Mastra
 - [ ] Create `apps/web` for Next.js
@@ -23,18 +24,21 @@ Get the monorepo scaffolded, Mastra and Next.js running locally, Postgres ready,
 - [ ] Add `.gitignore` — exclude `.env`, `node_modules`, build artifacts
 
 **Mastra Server**
+
 - [ ] Initialize Mastra in `apps/server` (`npx mastra@latest init`)
 - [ ] Configure Mastra with Postgres storage adapter (`@mastra/pg`)
 - [ ] Confirm Mastra dev server starts locally (`mastra dev`)
 - [ ] Confirm Mastra playground accessible at `localhost:4111`
 
 **Local Postgres + pgvector**
+
 - [ ] Install Postgres locally (Homebrew or Docker)
 - [ ] Install pgvector extension (`CREATE EXTENSION vector`)
 - [ ] Create `aelfred` database
 - [ ] Confirm Mastra connects and auto-creates its tables
 
 **DO Inference Engine**
+
 - [ ] Create DigitalOcean account (if not already)
 - [ ] Enable Inference Engine in DO console
 - [ ] Select models for each tier — small, mid, frontier
@@ -52,6 +56,7 @@ Get the monorepo scaffolded, Mastra and Next.js running locally, Postgres ready,
 - [ ] Confirm `turbo dev` starts both apps together
 
 ### Verification
+
 - [ ] `turbo dev` starts both server and web client
 - [ ] Mastra playground loads at `localhost:4111`
 - [ ] Next.js loads at `localhost:3000`
@@ -66,11 +71,13 @@ Single-user auth. Simple, secure, done once.
 ### Server Tasks
 
 **Database**
+
 - [ ] Create `users` table migration
 - [ ] Create `profile` table migration (includes `last_checkin_at`)
 - [ ] Create `password_reset_tokens` table migration
 
 **Auth Routes (Hono)**
+
 - [ ] `POST /auth/login` — validate credentials, issue JWT, set httpOnly cookie
 - [ ] `POST /auth/logout` — clear cookie
 - [ ] `POST /auth/reset-request` — generate reset token, send email
@@ -79,11 +86,13 @@ Single-user auth. Simple, secure, done once.
 - [ ] Cookie configured as `httpOnly`, `secure`, `sameSite=strict`
 
 **Email**
+
 - [ ] Choose transactional email provider (Resend recommended)
 - [ ] Configure email credentials in `.env`
 - [ ] Password reset email template
 
 **Profile API**
+
 - [ ] `GET /profile` — return current user's profile
 - [ ] `PUT /profile` — update profile fields
 - [ ] Seed initial profile row on first login
@@ -97,6 +106,7 @@ Single-user auth. Simple, secure, done once.
 - [ ] Settings panel (modal on mobile, side panel on desktop) — edit profile fields
 
 ### Verification
+
 - [ ] Login issues JWT cookie
 - [ ] Protected routes reject unauthenticated requests
 - [ ] Password reset works end to end
@@ -112,6 +122,7 @@ The first real Aelfred. Personality, memory, and cost tracking all wired in from
 ### Server Tasks
 
 **Orchestrator Agent**
+
 - [ ] Create orchestrator agent in `apps/server/src/mastra/agents/`
 - [ ] Write full system prompt — personality, character, voice, behavioral rules
 - [ ] Configure working memory — profile context injected on each conversation
@@ -122,6 +133,7 @@ The first real Aelfred. Personality, memory, and cost tracking all wired in from
 - [ ] Test: new session recalls previous conversation context
 
 **Cost Tracking**
+
 - [ ] Create `costs` table migration with `costs_created_at_idx` index
 - [ ] After every LLM call, extract token counts from DO Inference response
 - [ ] Calculate `cost_usd` from token counts and model pricing
@@ -129,6 +141,7 @@ The first real Aelfred. Personality, memory, and cost tracking all wired in from
 - [ ] `DEV_MODE` console logging for development visibility
 
 **Chat & Cost API**
+
 - [ ] `POST /chat` — receive message, pass to orchestrator, stream response
 - [ ] `GET /costs/today` — sum for current day in user's timezone
 - [ ] `GET /costs/month` — sum for current calendar month
@@ -147,6 +160,7 @@ The first real Aelfred. Personality, memory, and cost tracking all wired in from
 - [ ] "Aelf.red isn't perfect and may make mistakes" below chat input
 
 ### Verification
+
 - [ ] Full conversation with Aelfred — personality correct, memory working
 - [ ] New session picks up context from previous session
 - [ ] Every LLM call records a cost row
@@ -215,18 +229,21 @@ Spec to PR without leaving Aelf.red. Build this next — then use it to build ev
 ### Server Tasks
 
 **GitHub Integration**
+
 - [ ] Configure GitHub API credentials in `.env`
 - [ ] `GET /github/repos` — list all repos via GitHub API
 - [ ] `GET /github/repos/:repo/prs` — list open PRs
 - [ ] `POST /github/repos/:repo/pr` — create PR
 
 **Projects**
+
 - [ ] Create `projects` table migration with `projects_status_idx`
 - [ ] `GET /projects` — list projects
 - [ ] `POST /projects` — create project, optionally link to GitHub repo
 - [ ] `PUT /projects/:id` — update project
 
 **Dev Tool Workflows**
+
 - [ ] Spec intake — Aelfred receives spec in chat, confirms understanding
 - [ ] Plan generation — Aelfred writes execution plan, calculates confidence score
 - [ ] Plan review — if below confidence threshold, surface plan for approval before executing
@@ -237,6 +254,7 @@ Spec to PR without leaving Aelf.red. Build this next — then use it to build ev
 - [ ] PR creation — push branch, create PR, surface in chat for review
 
 **Cost Tracking**
+
 - [ ] Dev Tool LLM calls tagged with `dev` capability in costs table
 
 ### Web Tasks
@@ -293,15 +311,18 @@ Persistent files across all conversations. Collaborative editing. RAG over every
 ### Server Tasks
 
 **DO Spaces**
+
 - [ ] Create DO Spaces bucket (`{username}` as root)
 - [ ] Create `files/` and `dev/` folders
 - [ ] Configure Spaces credentials in `.env`
 
 **Database**
+
 - [ ] Create `file_format` enum
 - [ ] Create `files` table migration with embedding column and `files_name_idx`
 
 **File API**
+
 - [ ] `POST /files` — create file, upload to Spaces, generate embedding, insert metadata
 - [ ] `GET /files` — list all files
 - [ ] `GET /files/:id` — retrieve file content from Spaces
@@ -309,6 +330,7 @@ Persistent files across all conversations. Collaborative editing. RAG over every
 - [ ] `DELETE /files/:id` — remove from Spaces and DB
 
 **RAG Integration**
+
 - [ ] On each chat message, retrieve semantically relevant files via pgvector
 - [ ] Inject retrieved file context into orchestrator before responding
 
@@ -340,12 +362,14 @@ ADHD-aware reminders and tasks. Proactive, persistent, no list to look at.
 ### Server Tasks
 
 **Database**
+
 - [ ] Create `task_status`, `reminder_status`, `idea_status` enums
 - [ ] Create `tasks` table migration with `tasks_status_due_at_idx`
 - [ ] Create `reminders` table migration with `reminders_status_remind_at_idx`
 - [ ] Create `ideas` table migration with `ideas_status_idx`
 
 **Task & Reminder API**
+
 - [ ] `POST /tasks` — create task
 - [ ] `PUT /tasks/:id` — update status
 - [ ] `GET /tasks` — list by status
@@ -357,12 +381,14 @@ ADHD-aware reminders and tasks. Proactive, persistent, no list to look at.
 - [ ] `GET /ideas` — list by status
 
 **Reminder Workflows**
+
 - [ ] Mastra persistent workflow polls `reminders` on schedule
 - [ ] Fires when `remind_at` reached and status is `active`
 - [ ] Re-schedules based on `interval_minutes` until `done`
 - [ ] Surfaces reminder as a message in chat
 
 **Conversational Capture**
+
 - [ ] Orchestrator recognizes task/reminder intent from natural language
 - [ ] "Remind me to call John tomorrow at 3" → creates reminder without a command
 - [ ] Context chaining — "after my 3pm call, remind me to..." works correctly
@@ -390,11 +416,13 @@ Reusable code in a public GitHub repo, propagated across all your projects autom
 ### Server Tasks
 
 **Library Repo**
+
 - [ ] Create `joshevensen/aelfred-library` public GitHub repo
 - [ ] Define folder structure: `/components`, `/skills`, `/rules`, `/prompts`
 - [ ] Define versioning convention — git tags per item
 
 **Library API & Workflows**
+
 - [ ] `GET /library` — list all library items via GitHub API
 - [ ] `GET /library/:item` — retrieve item content
 - [ ] `POST /library/:item` — add or update item in library repo

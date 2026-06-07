@@ -42,17 +42,17 @@ A traditional British butler in the tradition of Alfred Pennyworth — warm, loy
 
 ## Tech Stack
 
-| Layer | Choice |
-|---|---|
-| Agent framework | [Mastra](https://mastra.ai) (TypeScript) |
-| Web client | React / Next.js + [Assistant UI](https://www.assistant-ui.com) |
-| Hosting | DigitalOcean Droplet |
-| Ephemeral compute | DigitalOcean Droplets (Dev Tool builds) |
-| LLM routing | DigitalOcean Inference Engine |
-| Database | Postgres on DO Volume |
-| Vectors | pgvector |
-| File storage | DigitalOcean Spaces |
-| Auth | Hono JWT — httpOnly cookie |
+| Layer             | Choice                                                         |
+| ----------------- | -------------------------------------------------------------- |
+| Agent framework   | [Mastra](https://mastra.ai) (TypeScript)                       |
+| Web client        | React / Next.js + [Assistant UI](https://www.assistant-ui.com) |
+| Hosting           | DigitalOcean Droplet                                           |
+| Ephemeral compute | DigitalOcean Droplets (Dev Tool builds)                        |
+| LLM routing       | DigitalOcean Inference Engine                                  |
+| Database          | Postgres on DO Volume                                          |
+| Vectors           | pgvector                                                       |
+| File storage      | DigitalOcean Spaces                                            |
+| Auth              | Hono JWT — httpOnly cookie                                     |
 
 ---
 
