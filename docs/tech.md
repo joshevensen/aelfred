@@ -29,21 +29,21 @@ Tools, workflows, and agents live inside the Mastra server where Mastra expects 
 
 ## Technical Stack
 
-| Layer | Choice |
-|---|---|
-| Agent framework | Mastra (TypeScript) |
-| Web client | React/Next.js + Assistant UI |
-| Native client | Swift / SwiftUI (future — iPhone, iPad, Mac, Apple Watch) |
-| Hosting | DigitalOcean Droplet ($12/month, upgrade to $24 if needed) |
-| Ephemeral compute | DigitalOcean Droplets (Dev Tool builds) |
-| File storage | DigitalOcean Spaces (S3-compatible object storage) |
-| Database | Postgres on DO Volume (persistent block storage, survives Droplet rebuilds) |
-| Vectors | pgvector on same Postgres instance |
-| LLM routing | DigitalOcean Inference Engine (multi-model, policy-driven) |
-| Auth | Hono JWT middleware — username/password, httpOnly cookie, email-based password reset |
-| Serverless functions | DigitalOcean Functions (webhooks, background jobs — not RAG) |
-| Voice | Deferred |
-| Browser automation | Mastra Browser / Stagehand (future) |
+| Layer                | Choice                                                                               |
+| -------------------- | ------------------------------------------------------------------------------------ |
+| Agent framework      | Mastra (TypeScript)                                                                  |
+| Web client           | React/Next.js + Assistant UI                                                         |
+| Native client        | Swift / SwiftUI (future — iPhone, iPad, Mac, Apple Watch)                            |
+| Hosting              | DigitalOcean Droplet ($12/month, upgrade to $24 if needed)                           |
+| Ephemeral compute    | DigitalOcean Droplets (Dev Tool builds)                                              |
+| File storage         | DigitalOcean Spaces (S3-compatible object storage)                                   |
+| Database             | Postgres on DO Volume (persistent block storage, survives Droplet rebuilds)          |
+| Vectors              | pgvector on same Postgres instance                                                   |
+| LLM routing          | DigitalOcean Inference Engine (multi-model, policy-driven)                           |
+| Auth                 | Hono JWT middleware — username/password, httpOnly cookie, email-based password reset |
+| Serverless functions | DigitalOcean Functions (webhooks, background jobs — not RAG)                         |
+| Voice                | Deferred                                                                             |
+| Browser automation   | Mastra Browser / Stagehand (future)                                                  |
 
 ---
 
@@ -54,7 +54,8 @@ All tables live in the same Postgres instance on the DO Volume. Mastra manages i
 ---
 
 ### Mastra Tables
-*Auto-created and managed by Mastra on first run. Never modify manually. All prefixed with `mastra_`.*
+
+_Auto-created and managed by Mastra on first run. Never modify manually. All prefixed with `mastra_`.\_
 
 **mastra_messages** — every conversation message
 | Column | Type | Notes |
@@ -119,14 +120,15 @@ All tables live in the same Postgres instance on the DO Volume. Mastra manages i
 | parentSpanId | text | nullable |
 | name | text | hierarchical operation name |
 
-*Semantic recall vector embeddings stored by Mastra using pgvector via `PgVector` — exact table name confirmed at build time.*
+_Semantic recall vector embeddings stored by Mastra using pgvector via `PgVector` — exact table name confirmed at build time._
 
-*Auto-created indexes: `mastra_threads_resourceid_createdat_idx`, `mastra_messages_thread_id_createdat_idx`, `mastra_traces_name_starttime_idx`, `mastra_evals_agent_name_created_at_idx`*
+_Auto-created indexes: `mastra_threads_resourceid_createdat_idx`, `mastra_messages_thread_id_createdat_idx`, `mastra_traces_name_starttime_idx`, `mastra_evals_agent_name_created_at_idx`_
 
 ---
 
 ### Aelf.red Tables
-*Custom tables owned by Aelf.red. Build each table when its feature is built — not before.*
+
+_Custom tables owned by Aelf.red. Build each table when its feature is built — not before._
 
 #### Enums
 
@@ -184,7 +186,7 @@ CREATE TYPE contact_relationship AS ENUM ('family', 'friend', 'colleague', 'vend
 | cost_usd | numeric(10,6) | |
 | created_at | timestamp | used to aggregate day/month totals |
 
-*Index: `costs_created_at_idx` (created_at) — powers day/month aggregation queries*
+_Index: `costs_created_at_idx` (created_at) — powers day/month aggregation queries_
 
 **files** — metadata for all files stored in Spaces
 | Column | Type | Notes |
@@ -197,7 +199,7 @@ CREATE TYPE contact_relationship AS ENUM ('family', 'friend', 'colleague', 'vend
 | created_at | timestamp | |
 | updated_at | timestamp | |
 
-*Index: `files_name_idx` (name) — used when browsing file explorer*
+_Index: `files_name_idx` (name) — used when browsing file explorer_
 
 **tasks** — Assistant capability
 | Column | Type | Notes |
@@ -210,7 +212,7 @@ CREATE TYPE contact_relationship AS ENUM ('family', 'friend', 'colleague', 'vend
 | updated_at | timestamp | |
 | deleted_at | timestamp | nullable — soft delete |
 
-*Index: `tasks_status_due_at_idx` (status, due_at)*
+_Index: `tasks_status_due_at_idx` (status, due_at)_
 
 **reminders** — Assistant capability, managed by Mastra workflows
 | Column | Type | Notes |
@@ -224,7 +226,7 @@ CREATE TYPE contact_relationship AS ENUM ('family', 'friend', 'colleague', 'vend
 | updated_at | timestamp | |
 | deleted_at | timestamp | nullable — soft delete |
 
-*Index: `reminders_status_remind_at_idx` (status, remind_at) — polled constantly by reminder workflows*
+_Index: `reminders_status_remind_at_idx` (status, remind_at) — polled constantly by reminder workflows_
 
 **ideas** — captured via conversation or @idea command
 | Column | Type | Notes |
@@ -236,7 +238,7 @@ CREATE TYPE contact_relationship AS ENUM ('family', 'friend', 'colleague', 'vend
 | updated_at | timestamp | |
 | deleted_at | timestamp | nullable — soft delete |
 
-*Index: `ideas_status_idx` (status)*
+_Index: `ideas_status_idx` (status)_
 
 **projects** — known to Aelfred, gives Dev Tool a place to associate context with GitHub repos
 | Column | Type | Notes |
@@ -251,9 +253,9 @@ CREATE TYPE contact_relationship AS ENUM ('family', 'friend', 'colleague', 'vend
 | updated_at | timestamp | |
 | deleted_at | timestamp | nullable — soft delete |
 
-*Business context (role, type, revenue, strategy) lives in semantic memory via Get to Know Me and ongoing conversation — not in a table.*
+_Business context (role, type, revenue, strategy) lives in semantic memory via Get to Know Me and ongoing conversation — not in a table._
 
-*Index: `projects_status_idx` (status)*
+_Index: `projects_status_idx` (status)_
 
 **contacts** — people Aelfred knows about
 | Column | Type | Notes |
@@ -270,7 +272,7 @@ CREATE TYPE contact_relationship AS ENUM ('family', 'friend', 'colleague', 'vend
 | updated_at | timestamp | |
 | deleted_at | timestamp | nullable — soft delete |
 
-*Indexes: `contacts_name_idx` (name), `contacts_relationship_idx` (relationship)*
+_Indexes: `contacts_name_idx` (name), `contacts_relationship_idx` (relationship)_
 
 ---
 
@@ -306,10 +308,8 @@ The `files` table in Postgres holds metadata and embeddings. Spaces holds the ac
 
 DO Inference Router enforces routing policy automatically. Configured once, applied to every call. Configurable in Aelf.red settings without changing code.
 
-| Task | Model Tier | Reason |
-|---|---|---|
-| Reminder scheduling, task parsing, idea capture | Small | Rule-based, no reasoning needed |
-| File editing, search, general chat | Mid-tier | Capable enough, cost effective |
-| Dev Tool planning, complex reasoning, sensitive conversations | Frontier | Quality matters most here |
-
-
+| Task                                                          | Model Tier | Reason                          |
+| ------------------------------------------------------------- | ---------- | ------------------------------- |
+| Reminder scheduling, task parsing, idea capture               | Small      | Rule-based, no reasoning needed |
+| File editing, search, general chat                            | Mid-tier   | Capable enough, cost effective  |
+| Dev Tool planning, complex reasoning, sensitive conversations | Frontier   | Quality matters most here       |
