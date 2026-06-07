@@ -1,159 +1,89 @@
-# Turborepo starter
+# Aelfred
 
-This Turborepo starter is maintained by the Turborepo core team.
+> A self-hosted personal AI that knows you — and never makes you re-explain yourself.
 
-## Using this example
+Aelfred is a personal AI platform built around one idea: your AI should have context, not just memory. One context pool. Every capability — chat, files, reminders, code — draws from the same accumulated understanding of who you are. Every conversation makes it more useful.
 
-Run the following command:
+Built on [Mastra](https://mastra.ai) (TypeScript agent framework). React/Next.js web client. Deployed on DigitalOcean. Dark mode only.
 
-```sh
-npx create-turbo@latest
-```
+---
 
-## What's inside?
+## Why Aelfred
 
-This Turborepo includes the following packages/apps:
+Most AI tools are stateless. You open a new chat and you are a stranger again. You re-explain your project, your preferences, your context. Every time.
 
-### Apps and Packages
+Aelfred does not work that way. It builds a structured understanding of you over time — your businesses, your relationships, your preferences, your history, your goals — and draws on all of it, automatically, on every message. The longer you use it, the more useful it gets.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+It is self-hosted on your own infrastructure. Nothing leaves your environment except LLM inference calls. Your data is yours.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+---
 
-### Utilities
+## Capabilities
 
-This Turborepo has some additional tools already setup for you:
+**Companion** — Persistent chat with no session limits. Memory retrieval on every message. Aelfred pulls what is relevant to the current topic automatically, without you asking.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+**Files** — A file system for your ideas, plans, and documents. Files persist across all conversations. Collaborative editing — tell Aelfred what to change, it changes exactly that. Markdown, JSON, CSV. Full-text and semantic search.
 
-### Build
+**Assistant** — Reminders that actually work. Conversational capture, persistent nudging, intelligent timing. Built on Mastra persistent workflows — survives server restarts.
 
-To build all apps and packages, run the following command:
+**Dev Tool** — Write a spec in plain language. Aelfred produces an execution plan. An ephemeral DigitalOcean Droplet builds, tests, and opens a PR. You review in chat. The Droplet is destroyed when done.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+**Code Library** — A personal library of reusable components, skills, rules, and prompt templates synced across all your repos from a single GitHub repository.
 
-```sh
-cd my-turborepo
-turbo build
-```
+---
 
-Without global `turbo`, use your package manager:
+## Character
 
-```sh
-cd my-turborepo
-npx turbo build
-pnpm dlx turbo build
-pnpm exec turbo build
-```
+Aelfred has a consistent character across everything — chat, files, code, reminders. The tone does not change based on what you are doing.
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+A traditional British butler in the tradition of Alfred Pennyworth — warm, loyal, deeply competent, and genuinely invested in your wellbeing and success. Not a servant executing orders but a trusted confidant who happens to be impeccably capable. The humor is deadpan, precise, and never performed. Concise by default. Honest about uncertainty. Never sycophantic.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+---
 
-```sh
-turbo build --filter=docs
-```
+## Tech Stack
 
-Without global `turbo`:
+| Layer | Choice |
+|---|---|
+| Agent framework | [Mastra](https://mastra.ai) (TypeScript) |
+| Web client | React / Next.js + [Assistant UI](https://www.assistant-ui.com) |
+| Hosting | DigitalOcean Droplet |
+| Ephemeral compute | DigitalOcean Droplets (Dev Tool builds) |
+| LLM routing | DigitalOcean Inference Engine |
+| Database | Postgres on DO Volume |
+| Vectors | pgvector |
+| File storage | DigitalOcean Spaces |
+| Auth | Hono JWT — httpOnly cookie |
 
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+---
 
-### Develop
+## Self-Hosting
 
-To develop all apps and packages, run the following command:
+> **Status: early development.** Self-hosting documentation and deployment scripts are not yet written. The architecture is defined and actively being built.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+Aelfred is designed to run on a single DigitalOcean Droplet (~$12/month). The full stack — API, web client, Postgres, pgvector — runs on one machine to start. Infrastructure cost is approximately $23/month fixed, plus LLM inference (~$10–25/month with sensible routing).
 
-```sh
-cd my-turborepo
-turbo dev
-```
+Deployment documentation will be added as the project matures. Follow the repo or watch for the first tagged release.
 
-Without global `turbo`, use your package manager:
+---
 
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
+## Project Status
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+This is a personal project built for daily use. It is open source because the ideas are worth sharing and others might find them useful or want to build something similar for themselves.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+There is no hosted version. There is no roadmap driven by user requests. Aelfred is built to scratch a specific itch — a self-hosted personal AI where memory is the core product — and shared in the hope that the architecture or approach is useful to others.
 
-```sh
-turbo dev --filter=web
-```
+See [CHANGELOG.md](./CHANGELOG.md) for what has changed.
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+## Contributing
 
-### Remote Caching
+Aelfred is a personal project maintained on personal time. It is not a supported open source project — there is no SLA on issues or PRs, and feature requests that do not align with personal use cases are unlikely to land.
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+That said, bug fixes, self-hosting improvements, and documentation contributions are genuinely useful. See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+---
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## License
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+Apache License 2.0 — see [LICENSE](./LICENSE).

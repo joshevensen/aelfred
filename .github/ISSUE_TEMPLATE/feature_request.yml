@@ -1,0 +1,41 @@
+name: Feature Request
+description: Suggest an improvement or addition
+labels: ["type:feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Aelfred is a personal project with an opinionated vision. Features that align with the core idea — memory as the product, one context pool — are more likely to land than general AI assistant features. Read [CONTRIBUTING.md](../CONTRIBUTING.md) before submitting.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the specific pain point or gap.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What would you build? How would it work?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What else did you consider? Why does this approach make more sense?
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: alignment
+    attributes:
+      label: Vision alignment
+      options:
+        - label: This feature draws from or contributes to Aelfred's memory/context pool
+        - label: This feature fits the self-hosted, personal use model
+        - label: I am willing to build this myself and open a PR
