@@ -1,6 +1,6 @@
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   username text NOT NULL,
   password_hash text NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
   CONSTRAINT users_email_not_blank CHECK (length(btrim(email)) > 0)
 );
 
-CREATE TABLE IF NOT EXISTS profile (
+CREATE TABLE profile (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   name text NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS profile (
   CONSTRAINT profile_timezone_not_blank CHECK (length(btrim(timezone)) > 0)
 );
 
-CREATE TABLE IF NOT EXISTS password_reset_tokens (
+CREATE TABLE password_reset_tokens (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   token_hash text NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS password_reset_tokens (
   CONSTRAINT password_reset_tokens_token_hash_not_blank CHECK (length(btrim(token_hash)) > 0)
 );
 
-CREATE INDEX IF NOT EXISTS password_reset_tokens_user_id_idx
+CREATE INDEX password_reset_tokens_user_id_idx
   ON password_reset_tokens (user_id);
 
-CREATE INDEX IF NOT EXISTS password_reset_tokens_expires_at_idx
+CREATE INDEX password_reset_tokens_expires_at_idx
   ON password_reset_tokens (expires_at);
