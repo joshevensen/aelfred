@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- `docker-compose.yml`: single-command local development environment (`docker compose up`) running Postgres+pgvector, the Mastra server, and the Next.js web app with hot reload and isolated `node_modules` volumes
+- `README.md`: Local Development section with setup steps, TablePlus connection parameters, and DO Inference credential requirements
 - `apps/server` workspace: Mastra AI server with `@mastra/pg` Postgres storage and DO Inference Engine as an OpenAI-compatible LLM provider with three model tiers (small, mid, frontier)
 - `packages/types` workspace (`@repo/types`): shared TypeScript types placeholder (`ApiResponse<T>`) wired into both `apps/server` and `apps/web`
 - `@assistant-ui/react` installed in `apps/web`
