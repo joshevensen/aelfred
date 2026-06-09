@@ -1,9 +1,16 @@
+import { globalIgnores } from "eslint/config";
 import { config } from "@repo/eslint-config/base";
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
+  globalIgnores([".mastra/**"]),
   ...config,
   {
-    ignores: [".mastra/**"],
+    languageOptions: {
+      globals: {
+        console: "readonly",
+        process: "readonly",
+      },
+    },
   },
 ];
