@@ -2,15 +2,16 @@ services:
   postgres:
     image: pgvector/pgvector:pg16
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: aelfred
     ports:
-      - "5432:5432"
+      # Bind to localhost only — prevents DB exposure on shared/public networks
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -20,20 +21,21 @@ services:
     working_dir: /app
     command: >
       sh -c "corepack enable &&
-             corepack prepare pnpm@latest --activate &&
+             corepack prepare pnpm@11.5.2 --activate &&
              pnpm install &&
              cd apps/server &&
              pnpm run dev"
     env_file: .env
     environment:
       # Override localhost from .env — inside the compose network the DB host is the service name
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/aelfred
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/aelfred
     ports:
       - "4111:4111"
     volumes:
       - .:/app
       - server_root_modules:/app/node_modules
       - server_app_modules:/app/apps/server/node_modules
+      - pnpm_store:/root/.local/share/pnpm/store
     depends_on:
       postgres:
         condition: service_healthy
@@ -43,7 +45,7 @@ services:
     working_dir: /app
     command: >
       sh -c "corepack enable &&
-             corepack prepare pnpm@latest --activate &&
+             corepack prepare pnpm@11.5.2 --activate &&
              pnpm install &&
              cd apps/web &&
              pnpm exec next dev --port 3000 --hostname 0.0.0.0"
@@ -57,6 +59,10 @@ services:
       - .:/app
       - web_root_modules:/app/node_modules
       - web_app_modules:/app/apps/web/node_modules
+      - pnpm_store:/root/.local/share/pnpm/store
+    depends_on:
+      server:
+        condition: service_started
 
 volumes:
   postgres_data:
@@ -64,3 +70,4 @@ volumes:
   server_app_modules:
   web_root_modules:
   web_app_modules:
+  pnpm_store:
