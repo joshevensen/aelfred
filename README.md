@@ -79,6 +79,35 @@ A traditional British butler in the tradition of Alfred Pennyworth — warm, loy
 
 > **Note on `DATABASE_URL`:** Keep `localhost` in your `.env` file. The Docker Compose file overrides this automatically to use the internal service hostname when the server runs inside the container.
 
+### Database Migrations
+
+Aelf.red custom tables are migrated separately from Mastra-managed tables. To verify the local migration path:
+
+1. Start Postgres:
+
+   ```bash
+   docker compose up postgres
+   ```
+
+2. In another terminal, run the migrations against `DATABASE_URL` from `.env`:
+
+   ```bash
+   pnpm run migrate
+   ```
+
+3. Rerun the same command to confirm already-applied migrations are skipped:
+
+   ```bash
+   pnpm run migrate
+   ```
+
+4. Inspect the custom tables:
+
+   ```bash
+   docker compose exec postgres sh -c 'psql -U "$POSTGRES_USER" -d aelfred -c "select tablename from pg_tables where schemaname = '\''public'\'' and tablename in ('\''users'\'', '\''profile'\'', '\''password_reset_tokens'\'') order by tablename;"'
+   docker compose exec postgres sh -c 'psql -U "$POSTGRES_USER" -d aelfred -c "select name from aelfred_migrations order by name;"'
+   ```
+
 ---
 
 ## Self-Hosting

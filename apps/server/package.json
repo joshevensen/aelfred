@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "mastra dev",
     "build": "mastra build",
+    "migrate": "node scripts/migrate.mjs",
     "lint": "eslint --max-warnings 0",
     "check-types": "tsc --noEmit"
   },
@@ -15,7 +16,9 @@
     "@mastra/core": "^1.41.0",
     "@mastra/pg": "^1.12.1",
     "@repo/types": "workspace:*",
-    "mastra": "^1.12.2"
+    "dotenv": "^17.4.2",
+    "mastra": "^1.12.2",
+    "pg": "^8.21.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
