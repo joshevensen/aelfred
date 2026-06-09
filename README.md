@@ -74,8 +74,8 @@ A traditional British butler in the tradition of Alfred Pennyworth — warm, loy
    - **Host:** `localhost`
    - **Port:** `5432`
    - **Database:** `aelfred`
-   - **User:** `postgres`
-   - **Password:** `postgres`
+   - **User:** your `POSTGRES_USER` from `.env` (default: `postgres`)
+   - **Password:** your `POSTGRES_PASSWORD` from `.env` (default: `postgres`)
 
 > **Note on `DATABASE_URL`:** Keep `localhost` in your `.env` file. The Docker Compose file overrides this automatically to use the internal service hostname when the server runs inside the container.
 
