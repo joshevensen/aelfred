@@ -117,7 +117,12 @@ async function run() {
       console.log(`Applied ${appliedCount} migration(s).`);
     }
   } catch (error) {
-    await client.query("ROLLBACK");
+    try {
+      await client.query("ROLLBACK");
+    } catch (rollbackError) {
+      console.error("Failed to roll back migration transaction", rollbackError);
+    }
+
     throw error;
   } finally {
     await client.end();
