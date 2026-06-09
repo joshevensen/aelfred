@@ -56,6 +56,31 @@ A traditional British butler in the tradition of Alfred Pennyworth — warm, loy
 
 ---
 
+## Local Development
+
+**Prerequisites:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+1. Copy `.env.example` to `.env` and fill in all values — including the DigitalOcean Inference Engine credentials (`DO_INFERENCE_API_KEY`, `DO_MODEL_SMALL`, `DO_MODEL_MID`, `DO_MODEL_FRONTIER`). The server will not start without them.
+
+2. Start all services:
+
+   ```bash
+   docker compose up
+   ```
+
+   This starts Postgres+pgvector on port 5432, the Mastra server on port 4111, and the Next.js app on port 3000. Dependencies (`node_modules`) are installed inside the containers on first run — this takes a minute the first time.
+
+3. Connect TablePlus (or any Postgres client) to the running database:
+   - **Host:** `localhost`
+   - **Port:** `5432`
+   - **Database:** `aelfred`
+   - **User:** your `POSTGRES_USER` from `.env` (default: `postgres`)
+   - **Password:** your `POSTGRES_PASSWORD` from `.env` (default: `postgres`)
+
+> **Note on `DATABASE_URL`:** Keep `localhost` in your `.env` file. The Docker Compose file overrides this automatically to use the internal service hostname when the server runs inside the container.
+
+---
+
 ## Self-Hosting
 
 > **Status: early development.** Self-hosting documentation and deployment scripts are not yet written. The architecture is defined and actively being built.

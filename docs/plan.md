@@ -14,27 +14,25 @@ Get the monorepo scaffolded, Mastra and Next.js running locally, Postgres ready,
 
 **Monorepo**
 
-- [ ] Initialize Turborepo monorepo (`npx create-turbo@latest`)
-- [ ] Create `apps/server` for Mastra
-- [ ] Create `apps/web` for Next.js
-- [ ] Create `packages/types` with shared TypeScript types placeholder
-- [ ] Configure root `turbo.json` with dev and build pipelines
-- [ ] Configure root `tsconfig.json` and `eslint` in `tooling/`
-- [ ] Add `.env.example` with all required environment variable keys
-- [ ] Add `.gitignore` — exclude `.env`, `node_modules`, build artifacts
+- [x] Initialize Turborepo monorepo (`npx create-turbo@latest`)
+- [x] Create `apps/server` for Mastra
+- [x] Create `apps/web` for Next.js
+- [x] Create `packages/types` with shared TypeScript types placeholder
+- [x] Configure root `turbo.json` with dev and build pipelines
+- [x] Configure root `tsconfig.json` and `eslint` in `tooling/`
+- [x] Add `.env.example` with all required environment variable keys
+- [x] Add `.gitignore` — exclude `.env`, `node_modules`, build artifacts
 
 **Mastra Server**
 
-- [ ] Initialize Mastra in `apps/server` (`npx mastra@latest init`)
-- [ ] Configure Mastra with Postgres storage adapter (`@mastra/pg`)
+- [x] Initialize Mastra in `apps/server` (`npx mastra@latest init`)
+- [x] Configure Mastra with Postgres storage adapter (`@mastra/pg`)
 - [ ] Confirm Mastra dev server starts locally (`mastra dev`)
 - [ ] Confirm Mastra playground accessible at `localhost:4111`
 
 **Local Postgres + pgvector**
 
-- [ ] Install Postgres locally (Homebrew or Docker)
-- [ ] Install pgvector extension (`CREATE EXTENSION vector`)
-- [ ] Create `aelfred` database
+- [x] Set up Postgres + pgvector via Docker Compose (`pgvector/pgvector:pg16`)
 - [ ] Confirm Mastra connects and auto-creates its tables
 
 **DO Inference Engine**
@@ -43,14 +41,14 @@ Get the monorepo scaffolded, Mastra and Next.js running locally, Postgres ready,
 - [ ] Enable Inference Engine in DO console
 - [ ] Select models for each tier — small, mid, frontier
 - [ ] Generate Inference Engine API key
-- [ ] Configure DO Inference as LLM provider in Mastra
+- [x] Configure DO Inference as LLM provider in Mastra
 - [ ] Add API key and model names to `.env`
 - [ ] Test a basic completion call returns a response
 
 ### Web Tasks
 
-- [ ] Initialize Next.js in `apps/web` (`npx create-next-app@latest`)
-- [ ] Install Assistant UI (`@assistant-ui/react`)
+- [x] Initialize Next.js in `apps/web` (`npx create-next-app@latest`)
+- [x] Install Assistant UI (`@assistant-ui/react`)
 - [ ] Configure dark mode only (Tailwind)
 - [ ] Confirm Next.js dev server starts at `localhost:3000`
 - [ ] Confirm `turbo dev` starts both apps together
