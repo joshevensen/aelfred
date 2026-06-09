@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- `apps/server` custom Postgres migration runner and initial auth/profile migration for `users`, `profile`, and `password_reset_tokens`
+- `README.md`: manual verification steps for applying and rerunning Aelf.red-owned database migrations
 - `docker-compose.yml`: single-command local development environment (`docker compose up`) running Postgres+pgvector, the Mastra server, and the Next.js web app with hot reload and isolated `node_modules` volumes
 - `README.md`: Local Development section with setup steps, TablePlus connection parameters, and DO Inference credential requirements
 - `apps/server` workspace: Mastra AI server with `@mastra/pg` Postgres storage and DO Inference Engine as an OpenAI-compatible LLM provider with three model tiers (small, mid, frontier)

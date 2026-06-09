@@ -1,3 +1,9 @@
+/**
+ * Applies Aelf.red-owned SQL migrations to the configured Postgres database.
+ * @context   Phase 2 auth/profile tables need a repeatable path that is separate from Mastra-managed storage.
+ * @gotchas   Loads the repo root `.env`; migration files are idempotent through `aelfred_migrations`, not through permissive SQL.
+ * @dependencies node:fs/promises, node:crypto, dotenv, pg
+ */
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";

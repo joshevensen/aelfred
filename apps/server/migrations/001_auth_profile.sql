@@ -1,3 +1,8 @@
+-- Creates Aelf.red-owned authentication and profile tables.
+-- @context   Phase 2 needs durable app-owned tables without touching Mastra-managed schema.
+-- @gotchas   Idempotency is handled by aelfred_migrations; plain CREATE statements intentionally fail on drift.
+-- @dependencies Postgres pgcrypto extension for gen_random_uuid().
+
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE TABLE users (
